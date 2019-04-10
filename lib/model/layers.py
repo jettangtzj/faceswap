@@ -14,6 +14,7 @@ import keras.backend as K
 
 from keras.engine import InputSpec, Layer
 from keras.utils import conv_utils
+from keras.utils.conv_utils import normalize_data_format
 from keras.utils.generic_utils import get_custom_objects
 from keras import initializers
 from keras.layers import ZeroPadding2D
@@ -25,7 +26,7 @@ class PixelShuffler(Layer):
     # pylint: disable=C0103
     def __init__(self, size=(2, 2), data_format=None, **kwargs):
         super(PixelShuffler, self).__init__(**kwargs)
-        self.data_format = K.normalize_data_format(data_format)
+        self.data_format = normalize_data_format(data_format)
         self.size = conv_utils.normalize_tuple(size, 2, 'size')
 
     def call(self, inputs, **kwargs):
